@@ -1,0 +1,67 @@
+---
+import { fetchAPI } from '~/utils/strapi';
+
+interface TimelineEntry {
+  Title: string;  // Note the capital T
+  Date: string;   // Note the capital D
+  Description: string; // Note the capital D
+  Category?: string;
+  Tags?: string[] | null;
+  ExternalLink?: string | null;
+  Image?: any | null;
+  documentId: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+}
+
+let timelineEntries: TimelineEntry[] = [];
+let error: string | null = null;
+let debugResponse = null;
+
+try {
+  const response = await fetchAPI<TimelineEntry>('/timeline-entries');
+  debugResponse = response;
+
+  if (response?.data) {
+    // Note: The data is directly in response.data, no need to access attributes
+    timelineEntries = response.data;
+  }
+} catch (e) {
+  console.error('Full error:', e);
+  error = e instanceof Error ? e.message : 'An unknown error occurred';
+}
+---
+
+<div class="container mx-auto px-4 py-8">
+  <h2 class="text-2xl font-bold mb-4">Timeline Test</h2>
+
+  {error ? (
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+      Error: {error}
+    </div>
+  ) : (
+    <>
+      <div class="space-y-4">
+        {timelineEntries && timelineEntries.length > 0 ? (
+          timelineEntries.map((entry) => (
+            <div class="bg-white dark:bg-slate-800 p-4 rounded shadow">
+              <h3 class="font-bold">{entry.Title}</h3>
+              <p class="text-sm text-gray-600 dark:text-gray-300">
+                {entry.Date && new Date(entry.Date).toLocaleDateString()}
+              </p>
+              <p>{entry.Description}</p>
+              {entry.Category && (
+                <span class="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100 text-xs px-2 py-1 rounded mt-2">
+                  {entry.Category}
+                </span>
+              )}
+            </div>
+          ))
+        ) : (
+          <p>No timeline entries found</p>
+        )}
+      </div>
+    </>
+  )}
+</div>

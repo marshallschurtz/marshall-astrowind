@@ -1,0 +1,50 @@
+{
+  "kind": "collectionType",
+  "collectionName": "timeline_entries",
+  "info": {
+    "singularName": "timeline-entry",
+    "pluralName": "timeline-entries",
+    "displayName": "Timeline Entry"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Title": {
+      "type": "string",
+      "required": true
+    },
+    "Date": {
+      "type": "date",
+      "required": true
+    },
+    "Description": {
+      "type": "richtext"
+    },
+    "Category": {
+      "type": "enumeration",
+      "enum": [
+        "professional",
+        "academic",
+        "projects"
+      ]
+    },
+    "Tags": {
+      "type": "json"
+    },
+    "Image": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "ExternalLink": {
+      "type": "string"
+    }
+  }
+}

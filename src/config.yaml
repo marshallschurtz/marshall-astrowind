@@ -59,6 +59,23 @@ apps:
       pathname: 'tag' # Tag main path /tag/some-tag, you can change this to "topics" (/topics/some-category)
       robots:
         index: false
+    apps:
+  
+  portfolio:
+    isEnabled: true
+    permalink: '/portfolio/%slug%'
+
+  archaeology:
+    isEnabled: true
+    permalink: '/archaeology/%category%/%slug%'
+
+  timeline:
+    isEnabled: true
+    permalink: '/timeline'
+    categories:
+      - professional
+      - academic
+      - projects
 
     isRelatedPostsEnabled: true
     relatedPostsCount: 4

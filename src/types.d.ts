@@ -284,3 +284,31 @@ export interface Content extends Omit<Headline, 'classes'>, Widget {
 }
 
 export interface Contact extends Omit<Headline, 'classes'>, Form, Widget {}
+
+interface TimelineItem {
+  id: string;
+  title: string;
+  date: Date;
+  description: string;
+  category: string;
+  tags: string[];
+  imageUrl?: string;
+  externalLink?: string;
+}
+
+interface PortfolioEmbed {
+  id: string;
+  title: string;
+  embedType: 'looker' | 'tableau' | 'powerbi';
+  embedUrl: string;
+  description: string;
+}
+
+interface Project {
+  id: string;
+  title: string;
+  slug: string;
+  description: string;
+  links: Array<{url: string, label: string}>;
+  content: string;
+}
